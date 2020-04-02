@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>折叠卡片</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .box {
+            width: 500px;
+            border: 1px solid rgb(112, 6, 103);
+            margin: 40px auto;
+        }
+
+        .box h4 {
+            line-height: 40px;
+            border: 1px solid rgb(112, 6, 103);
+            cursor: pointer;
+            background-color: rgb(230, 112, 204);
+        }
+
+        .box .content {
+            display: none;
+        }
+
+        .box .content.flag {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h4>Card of A</h4>
+        <div class="content flag">
+            <h3>《热爱生命》</h3>
+            <br>
+            <p>我不去想是否能够成功</p>
+            <p>既然选择了远方</p>
+            <p>便只顾风雨兼程</p>
+            <br>
+            <p>我不去想能否赢得爱情</p>
+            <p>既然钟情于玫瑰</p>
+            <p>就勇敢地吐露真诚</p>
+            <br>
+            <p>我不去想身后会不会袭来寒风冷雨</p>
+            <p>既然目标是地平线</p>
+            <p>留给世界的只能是背影</p>
+            <br>
+            <p>我不去想未来是平坦还是泥泞</p>
+            <p>只要热爱生命</p>
+            <p>一切，都在意料之中</p>
+            <br>
+        </div>
+        <h4>Card of B</h4>
+        <div class="content">
+            <h3>《远和近》</h3>
+            <br>
+            <p>你，</p>
+            <p>一会看我，一会看云。</p>
+            <p>我觉得，</p>
+            <p>你看我时很远，你看云时很近。</p>
+            <br>
+        </div>
+        <h4>Card of C</h4>
+        <div class="content">
+            <h3>《重量》</h3>
+            <br>
+            <p>她把带血的头颅，</p>
+            <p>放在生命的天平上，</p>
+            <p>让所有的苟活者，</p>
+            <p>都失去了——</p>
+            <p>重量。</p>
+            <br>
+        </div>
+    </div>
+
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        $('.box h4').click(function () {
+            // 判断下一个兄弟是否可见
+            // 如果下一个兄弟不可见
+            if (!$(this).next().is(':visible')) {
+                // 让你点击的这个h4下一个兄弟.inn展开
+                // 让所有的content（包括它自己的下一个兄弟)都合起来
+                $('.content').slideUp();
+                // next就是下一个兄弟，slideDown就是展开，300是毫秒数
+                $(this).next().slideDown(300);
+            } else {
+                // 否则就合起来，slideUp就是合起来，300是毫秒数
+                $(this).next().slideUp(300);
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tab选项卡</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .box{
+            width: 300px;
+            height: 300px;
+            border: 1px solid rgb(55, 28, 177);
+            margin: 50px auto;
+        }
+        .box .header{
+            height: 40px;
+            background-color: #FFF;
+        }
+        .box span{
+            float: left;
+            width: 100px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+        }
+        .box span.flag{
+            background-color: rgb(8, 122, 27);
+        }
+        .box .inner{
+            width: 300px;
+            height: 260px;
+            background-color: rgb(107, 142, 238);
+            display: none;
+        }
+        .box .inner.flag{
+            display: block;
+        }
+        .box .inner h4{
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+        }
+        .box .inner p{
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="header">
+            <span class="flag">选项一</span>
+            <span>选项二</span>
+            <span>选项三</span>
+        </div>
+        <div class="content">
+            <div class="inner flag">
+                <h4>《木兰花·拟古决绝词柬友》</h4>
+                <p>人生若只如初见，何事秋风悲画扇。</p>
+                <p>等闲变却故人心，却道故人心易变。</p>
+                <p>骊山语罢清宵半，泪雨霖铃终不怨。</p>
+                <p>何如薄幸锦衣郎，比翼连枝当日愿。</p>
+            </div>
+            <div class="inner">
+                <h4>《桃夭》</h4>
+                <p>桃之夭夭，灼灼其华。</p>
+                <p>之子于归，宜其室家。</p>
+                <p>桃之夭夭，有蕡其实。</p>
+                <p>之子于归，宜其家室。</p>
+                <p>桃之夭夭，其叶蓁蓁。</p>
+                <p>之子于归，宜其家人。</p>
+            </div>
+            <div class="inner">
+                <h4>《生查子·元夕》</h4>
+                <p>去年元夜时，花市灯如昼。</p>
+                <p>月上柳梢头，人约黄昏后。</p>
+                <p>今年元夜时，月与灯依旧。</p>
+                <p>不见去年人，泪湿春衫袖。</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        // 触碰span的时候发生的事件
+        $('.box .header span').mouseenter(function(){
+            // 碰到span加cur，其他去cur
+            $(this).addClass('flag').siblings().removeClass('flag');
+
+            // 得到你碰到的元素的序号
+            var n = $(this).index();
+
+            // 让下面的inner也是这个序号的，加flag，其他去flag
+            $('.inner').eq(n).addClass('flag').siblings().removeClass('flag');
+        });
+    </script>
+</body>
+</html>
