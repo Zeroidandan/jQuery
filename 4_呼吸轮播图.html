@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>呼吸轮播图</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        div {
+            width: 400px;
+            height: 300px;
+            border: 1px solid rgb(243, 198, 198);
+            position: relative;
+            margin: 50px auto;
+        }
+
+        ul li {
+            list-style: none;
+            display: none;
+            position: absolute;
+        }
+
+        ul li img {
+            width: 400px;
+            height: 300px;
+        }
+
+        .no1 {
+            display: inline;
+        }
+
+        .btn {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: rgb(68, 95, 247, 0.6);
+            margin-top: -10px;
+            top: 50%;
+        }
+
+        .left {
+            left: 10px
+        }
+
+        .right {
+            right: 10px
+        }
+
+        ol {
+            position: absolute;
+            width: 100px;
+            height: 20px;
+            bottom: 10px;
+            list-style: none;
+            right: 10px;
+        }
+
+        ol li {
+            float: left;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-right: 10px;
+            background-color: rgb(68, 95, 247, 0.6);
+            cursor: pointer;
+
+        }
+
+        ol li.checked {
+            background-color: rgb(23, 232, 240);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box">
+        <ul>
+            <li class="no1"><img
+                    src="https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=2341344981,1389586328&fm=26&gp=0.jpg"
+                    alt=""></li>
+            <li><img src="https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3980078121,3797813304&fm=26&gp=0.jpg"
+                    alt=""></li>
+            <li><img src="https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=2087915890,1891505569&fm=26&gp=0.jpg"
+                    alt=""></li>
+            <li><img src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=107672318,950228748&fm=26&gp=0.jpg"
+                    alt=""></li>
+            <li><img src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1183211461,2858493231&fm=26&gp=0.jpg"
+                    alt=""></li>
+        </ul>
+        <a href="javascript:;" id="left" class="btn left"></a>
+        <a href="javascript:;" id="right" class="btn right"></a>
+        <ol>
+            <li class="checked"></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ol>
+    </div>
+
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        // 表示当前轮播图片的号数
+        var num = 0;
+
+        // 右边按钮轮播
+        $('#right').click(function () {
+            // 如果li正在进行动画，则什么也不做
+            if ($('#box ul li').is(':animated')) {
+                // return一个空，表示立即结束这个函数，不做后面的语句了
+                return;
+            }
+            // 图片1淡出
+            $('#box ul li').eq(num).fadeOut(300);
+            num++;
+            // 验收
+            if (num > 4) {
+                num = 0;
+            }
+            $('#box ul li').eq(num).fadeIn(300);
+            $('#box ol li').eq(num).addClass('checked').siblings().removeClass('checked');
+        });
+
+
+        // 左边按钮轮播
+        $('#left').click(function () {
+
+            // 如果li正在进行动画，则什么也不做
+            if ($('#box ul li').is(':animated')) {
+                // return一个空，表示立即结束这个函数，不做后面的语句了
+                return;
+            }
+            // 图片1淡出
+            $('#box ul li').eq(num).fadeOut(300);
+
+            num--;
+            // 验收
+            if (num < 0) {
+                num = 4;
+            }
+            $('#box ul li').eq(num).fadeIn(300);
+            // 让第idx那个小圆点加cur，兄弟们都去掉cur
+            $('#box ol li').eq(num).addClass('checked').siblings().removeClass('checked');
+        });
+
+        // 点击小圆点
+        $('#box ol li').click(function () {
+            // 当前淡出
+            $('#box ul li').eq(num).fadeOut(300);
+            num = $(this).index();
+            $('#box ul li').eq(num).fadeIn(300);
+            // 小圆点变颜色
+            $('#box ol li').eq(num).addClass('checked').siblings().removeClass('checked');
+        });
+
+        // 书写定时器-自动轮播
+        // 加锁子
+        var lock = true;
+        setInterval(function(){
+            if (lock) {
+                $('#right').trigger('click');
+            }
+        },1000);
+
+        // 鼠标碰到大盒子，关锁
+        $('#box').mouseenter(function(){
+            lock = false;
+        });
+
+        // 鼠标离开大盒子，开锁
+        $('#box').mouseleave(function(){
+            lock = true;
+        });
+    </script>
+</body>
+
+</html>

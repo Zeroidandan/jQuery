@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>-jQuery实现元素变换盒子</title>
+</head>
+
+<body>
+    <ul id="list1">
+        <li><input type="checkbox">A</li>
+        <li><input type="checkbox">B</li>
+        <li><input type="checkbox">c</li>
+    </ul>
+    <button id="btn1">下去吧</button>
+
+    <ul id="list2">
+        <li><input type="checkbox">D</li>
+        <li><input type="checkbox">E</li>
+        <li><input type="checkbox">FFFF</li>
+    </ul>
+    <button id="btn2">上去吧</button>
+
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        $('#btn1').click(function () {
+            $('#list1  input:checked').prop('checked', false).parent().appendTo('#list2');
+        });
+
+        $('#btn2').click(function () {
+            $('#list2  input:checked').prop('checked', false).parent().appendTo('#list1');
+        });
+    </script>
+</body>
+
+</html>

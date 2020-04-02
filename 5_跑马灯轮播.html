@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>跑马灯轮播</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        div {
+            width: 600px;
+            height: 900px;
+            border: 1px solid rgb(243, 198, 198);
+            position: relative;
+            margin: 50px auto;
+            overflow: hidden;
+        }
+
+        ul {
+            position: relative;
+            width: 300000px;
+            list-style: none;
+        }
+
+        ul li {
+            float: left;
+        }
+
+        ul li img {
+            width: 600px;
+            height: 900px;
+        }
+
+        .no1 {
+            display: inline;
+        }
+
+        .btn {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: rgba(241, 160, 93, 0.6);
+            margin-top: -10px;
+            top: 50%;
+        }
+
+        .left {
+            left: 10px
+        }
+
+        .right {
+            right: 10px
+        }
+
+        ol {
+            position: absolute;
+            width: 100px;
+            height: 20px;
+            bottom: 10px;
+            list-style: none;
+            right: 10px;
+        }
+
+        ol li {
+            float: left;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-right: 10px;
+            background-color: rgba(241, 160, 93, 0.6);
+            cursor: pointer;
+
+        }
+
+        ol li.checked {
+            background-color: rgb(238, 88, 42);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box">
+        <ul>
+            <li class="no1"><img
+                    src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2342268382,3338576674&fm=26&gp=0.jpg"
+                    alt=""></li>
+            <li><img src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1572517343,1119182163&fm=26&gp=0.jpg"
+                    alt=""></li>
+            <li><img src="https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=145754479,1974477238&fm=26&gp=0.jpg"
+                    alt=""></li>
+            <li><img src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1885498483,2776030051&fm=11&gp=0.jpg"
+                    alt=""></li>
+            <li><img src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1678589123,786990485&fm=26&gp=0.jpg"
+                    alt=""></li>
+        </ul>
+        <a href="javascript:;" class="btn left" id="left"></a>
+        <a href="javascript:;" class="btn right" id="right"></a>
+        <ol>
+            <li class="checked"></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ol>
+    </div>
+
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+
+        // 克隆第一个li，追加到最后
+        $('#box ul li').eq(0).clone().appendTo('#box ul');
+
+        var num = 0;
+        $('#right').click(function () {
+            // 如果li正在进行动画，则什么也不做
+            if ($('#box ul li').is(':animated')) {
+                // return一个空，表示立即结束这个函数，不做后面的语句了
+                return;
+            }
+
+            num++;
+            // 拉动，回调函数
+            $('#box ul').animate({ 'left': -600 * num }, 400,function(){
+                if (num > 5) {
+                  num = 0;
+                  $('#box ul').css('left', 0);
+                }
+            });
+            // 让第idx那个小圆点加cur，兄弟们都去掉cur
+            // 为什么要百分号6以下？因为idx是6的时候，就是猫腻，也当做0处理。
+            $('#box ol li').eq(num % 5).addClass('checked').siblings().removeClass('checked');
+            
+        });
+
+        // 点击左按钮做的事情
+        $('#left').click(function () {
+            // 如果ul正在进行动画，则什么也不做
+            if ($('#box ul').is(':animated')) {
+                // return一个空，表示立即结束这个函数，不做后面的语句了
+                return;
+            }
+            // 一上来就要考虑猫腻
+            if (num == 0) {
+                // 如果idx现在是0，那么就变为6，就是变为猫腻那张图
+                num = 5;
+                // css是瞬移，移动到最后一张图
+                $('#box ul').css('left', -900 * 6);
+            }
+
+            num--;
+            // 运动用animate函数
+            $('#box ul').animate({ 'left': -900 * num }, 400);
+            // 让第idx那个小圆点加cur，兄弟们都去掉cur
+            $('#box ol li').eq(num).addClass('checked').siblings().removeClass('checked');
+        });
+    </script>
+</body>
+
+</html>
