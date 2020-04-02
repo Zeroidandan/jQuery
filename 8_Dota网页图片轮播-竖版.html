@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dota网页图片轮播-竖版</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .box {
+            width: 380px;
+            height: 285px;
+            border: 5px solid rgb(7, 119, 13);
+            margin: 50px auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .box ul {
+            width: 380px;
+            height: 230px;
+            position: relative;
+            list-style: none;
+            cursor: pointer;
+        }
+
+        .box ol {
+            width: 380px;
+            height: 70px;
+            position: absolute;
+            list-style: none;
+            background-color: rgb(88, 86, 86);
+        }
+
+        .box ol li {
+            width: 70px;
+            height: 42px;
+            float: left;
+            /* 将边框颜色设置为透明 */
+            border: 3px solid transparent;
+            cursor: pointer;
+        }
+
+        .box ol li img {
+            width: 70px;
+            height: 42px;
+        }
+
+        .box ol li.checked {
+            border: 3px solid orange;
+            border-bottom: 10px solid orange;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box" id="box">
+        <ul>
+            <li></li><img src="http://image5.uuu9.com/dota2/portal/20200331/5e8306c9b0a3e.jpg" alt="Alliance战队做出人员调整">
+            </li>
+            <li><img src="http://image5.uuu9.com/dota2/portal/20200325/5e7b0adceb118.jpg" alt="天梯技术如何提升"></li>
+            <li><img src="http://image5.uuu9.com/dota2/portal/20200324/5e79aff65a98d.jpg" alt="WeSave慈善赛"></li>
+            <li><img src="http://image5.uuu9.com/dota2/portal/20200317/5e70836e89c6c.jpg" alt="刀海钩沉之DreamTime"></li>
+            <li><img src="http://image5.uuu9.com/dota2/portal/20200312/5e69fbe88c3b3.jpg" alt="洛杉矶Major取消"></li>
+        </ul>
+
+        <ol>
+            <li class="checked"><img src="http://image5.uuu9.com/dota2/portal/20200331/5e8306c9b0a3e.jpg"
+                    alt="Alliance战队做出人员调整"></li>
+            <li><img src="http://image5.uuu9.com/dota2/portal/20200325/5e7b0adceb118.jpg" alt="天梯技术如何提升"></li>
+            <li> <img src="http://image5.uuu9.com/dota2/portal/20200324/5e79aff65a98d.jpg" alt="WeSave慈善赛"></li>
+            <li><img src="http://image5.uuu9.com/dota2/portal/20200317/5e70836e89c6c.jpg" alt="刀海钩沉之DreamTime"></li>
+            <li><img src="http://image5.uuu9.com/dota2/portal/20200312/5e69fbe88c3b3.jpg" alt="洛杉矶Major取消"></li>
+        </ol>
+    </div>
+
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        // 信号量
+        var idx = 0;
+        // 写一个锁，标记用户鼠标是否移动上来了
+        var lock = true;
+        // 定时器
+        setInterval(function () {
+            // 如果锁是开着的，那么就触发右按钮
+            if (lock) {
+                idx++;
+                if (idx > 4) {
+                    idx = 0;
+                    $('#box ul').animate({ 'top': -234 * idx }, 500);
+                }
+                // 触发大图片轮播
+                $('#box ul').animate({ 'top': -234 * idx }, 500);
+                // 让第idx那个小图片加checked，兄弟们都去掉checked
+                $('#box ol li').eq(idx).addClass('checked').siblings().removeClass('checked');
+            }
+        }, 1000);
+
+        // 小图片点击事件
+        $('#box ol li').mouseenter(function () {
+            // 这样的写法就表示你点击的小圆点序号
+            idx = $(this).index();
+            // 拉动
+            $('#box ul').animate({ 'top': -234 * idx }, 500);
+            // 让第idx那个小圆点加checked，兄弟们都去掉checked
+            $('#box ol li').eq(idx).addClass('checked').siblings().removeClass('checked');
+        });
+
+        // 鼠标碰到大盒子，就关锁
+        $('#box').mouseenter(function () {
+            lock = false;
+        });
+        // 鼠标离开大盒子，就开锁
+        $('#box').mouseleave(function () {
+            lock = true;
+        });
+    </script>
+</body>
+
+</html>

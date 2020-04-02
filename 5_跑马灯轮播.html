@@ -155,8 +155,40 @@
             num--;
             // 运动用animate函数
             $('#box ul').animate({ 'left': -900 * num }, 400);
-            // 让第idx那个小圆点加cur，兄弟们都去掉cur
+            // 让第idx那个小圆点加checked，兄弟们都去掉cur
             $('#box ol li').eq(num).addClass('checked').siblings().removeClass('checked');
+        });
+
+        //点击小圆点做的事情
+        $('#box ol li').click(function () {
+            // 这样的写法就表示你点击的小圆点序号
+            idx = $(this).index();
+            // 拉动
+            $('#box ul').animate({ 'left': -900 * idx }, 400);
+            // 让第idx那个小圆点加checked，兄弟们都去掉checked
+            $('#box ol li').eq(idx).addClass('checked').siblings().removeClass('checked');
+        });
+
+        // ****************************************************
+        // 下面是定时器的逻辑
+        // 写一个锁，标记用户鼠标是否移动上来了
+        var lock = true;
+        // 定时器
+        setInterval(function () {
+            // 如果锁是开着的，那么就触发右按钮
+            if (lock) {
+                // 触发右按钮
+                $('#right').trigger('click');
+            }
+        }, 2000);
+
+        // 鼠标碰到大盒子，就关锁
+        $('#box').mouseenter(function () {
+            lock = false;
+        });
+        // 鼠标离开大盒子，就开锁
+        $('#box').mouseleave(function () {
+            lock = true;
         });
     </script>
 </body>
