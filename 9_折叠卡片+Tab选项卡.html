@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>折叠卡片+Tab选项卡</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            margin-bottom: 50px;
+            text-align: center;
+        }
+
+        .box {
+            width: 900px;
+            background-color: rgb(252, 199, 199);
+            margin: 100px auto;
+        }
+
+        .card {
+            line-height: 30px;
+            background-color: #eef8e9;
+            color: #54c5ca;
+            cursor: pointer;
+            /* position: relative; */
+        }
+
+        .tab {
+            display: none;
+            /* position: absolute; */
+        }
+
+        .box .tab.flag {
+            display: block;
+        }
+
+        .tab_num {
+            width: 120px;
+            position: relative;
+        }
+
+        .tab_content {
+            width: 780px;
+            position: absolute;
+        }
+
+        .num {
+            width: 80px;
+            height: 40px;
+            border-radius: 10px;
+            background-color: #f3f5f6;
+            /* background-color: green; */
+            margin: 20px;
+            line-height: 40px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .box .tab .tab_num {
+            display: none;
+        }
+
+        .box .tab .tab_num.flag {
+            display: block;
+        }
+
+        .box .tab .tab_content .content {
+            display: none;
+        }
+
+        .box .tab .tab_content .content.flag {
+            display: block;
+        }
+
+        .content {
+            width: 780px;
+            /* background-color: #f3f5f6; */
+            background-color: red;
+            /* float: right; */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <h1>课程大纲及学习周期安排（详细版）</h1>
+        <!-- 折叠卡片 -->
+        <div class="card">
+            <p>阶段一：Python零基础入门</p>
+        </div>
+        <!-- Tab选项卡 -->
+        <div class="tab flag">
+            <!-- 选项 -->
+            <div class="tab_num  flag">
+                <div class="num">步骤一</div>
+                <div class="num">步骤二</div>
+                <div class="num">步骤三</div>
+                <div class="num">步骤四</div>
+                <div class="num">步骤五</div>
+            </div>
+            <!-- 选项内容 -->
+            <div class="tab_content">
+                <div class="content flag">步骤一步骤一步骤一步骤一步骤一</div>
+                <div class="content">步骤二步骤二步骤二</div>
+                <div class="content">步骤三步骤三步骤三步骤三步骤三</div>
+                <div class="content">步骤四步骤四步骤四步骤四步骤四</div>
+                <div class="content">步骤五步骤五步骤五步骤五</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <p>阶段二：Python操作三大数据库</p>
+        </div>
+        <div class="tab">
+            <div class="tab_num  flag">
+                <div class="num">步骤一</div>
+                <div class="num">步骤二</div>
+                <div class="num">步骤三</div>
+            </div>
+            <div class="tab_content">
+                <div class="content flag">步骤一步骤一步骤一步骤一步骤一</div>
+                <div class="content">步骤二步骤二步骤二</div>
+                <div class="content">步骤三步骤三步骤三步骤三步骤三</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <p>阶段三：从网页搭建入门Python Web</p>
+        </div>
+        <div class="tab">
+            <div class="tab_num  flag">
+                <div class="num">步骤一</div>
+                <div class="num">步骤二</div>
+                <div class="num">步骤三</div>
+                <div class="num">步骤四</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <p>阶段四：入门主流框架Scrapy与爬虫项目实战</p>
+        </div>
+        <div class="tab">
+            <div class="tab_num  flag">
+                <div class="num">步骤一</div>
+                <div class="num">步骤二</div>
+                <div class="num">步骤三</div>
+                <div class="num">步骤四</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        // 折叠点击
+        $('.box .card').click(function () {
+            // 判断下一个兄弟是否可见
+            // 如果下一个兄弟不可见
+            if (!$(this).next().is(':visible')) {
+                // 让你点击的这个h4下一个兄弟.inn展开
+                // 让所有的content（包括它自己的下一个兄弟)都合起来
+                $('.tab').slideUp();
+                // next就是下一个兄弟，slideDown就是展开，300是毫秒数
+                $(this).next().slideDown(300);
+            } else {
+                // 否则就合起来，slideUp就是合起来，300是毫秒数
+                $(this).next().slideUp(300);
+            }
+        });
+
+        //Tab点击
+        $('.box .num').mouseenter(function () {
+            // 碰到span加cur，其他去cur
+            $(this).addClass('flag').siblings().removeClass('flag');
+
+            // 得到你碰到的元素的序号
+            var n = $(this).index();
+
+            // 让下面的inner也是这个序号的，加flag，其他去flag
+            $('.content').eq(n).addClass('flag').siblings().removeClass('flag');
+        });
+    </script>
+</body>
+
+</html>
