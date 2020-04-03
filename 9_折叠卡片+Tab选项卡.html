@@ -27,12 +27,10 @@
             background-color: #eef8e9;
             color: #54c5ca;
             cursor: pointer;
-            /* position: relative; */
         }
 
         .tab {
             display: none;
-            /* position: absolute; */
         }
 
         .box .tab.flag {
@@ -41,12 +39,17 @@
 
         .tab_num {
             width: 120px;
-            position: relative;
+            height: 300px;
+            float: left;
+            background-color: blue;
         }
 
         .tab_content {
             width: 780px;
-            position: absolute;
+            height: 300px;
+            float: right;
+            /* position: absolute; */
+            background-color: green;
         }
 
         .num {
@@ -54,11 +57,17 @@
             height: 40px;
             border-radius: 10px;
             background-color: #f3f5f6;
-            /* background-color: green; */
             margin: 20px;
             line-height: 40px;
             text-align: center;
             cursor: pointer;
+        }
+
+        .content {
+            width: 500px;
+            /* background-color: #f3f5f6; */
+            /* background-color: red; */
+            
         }
 
         .box .tab .tab_num {
@@ -75,13 +84,6 @@
 
         .box .tab .tab_content .content.flag {
             display: block;
-        }
-
-        .content {
-            width: 780px;
-            /* background-color: #f3f5f6; */
-            background-color: red;
-            /* float: right; */
         }
     </style>
 </head>
@@ -139,6 +141,12 @@
                 <div class="num">步骤三</div>
                 <div class="num">步骤四</div>
             </div>
+            <div class="tab_content">
+                <div class="content flag">步骤一步骤一步骤一步骤一步骤一</div>
+                <div class="content">步骤二步骤二步骤二</div>
+                <div class="content">步骤三步骤三步骤三步骤三步骤三</div>
+                <div class="content">步骤四步骤四步骤四步骤四步骤四</div>
+            </div>
         </div>
 
         <div class="card">
@@ -150,6 +158,12 @@
                 <div class="num">步骤二</div>
                 <div class="num">步骤三</div>
                 <div class="num">步骤四</div>
+            </div>
+            <div class="tab_content">
+                <div class="content flag">步骤一步骤一步骤一步骤一步骤一</div>
+                <div class="content">步骤二步骤二步骤二</div>
+                <div class="content">步骤三步骤三步骤三步骤三步骤三</div>
+                <div class="content">步骤四步骤四步骤四步骤四步骤四</div>
             </div>
         </div>
     </div>
@@ -173,7 +187,7 @@
         });
 
         //Tab点击
-        $('.box .num').mouseenter(function () {
+        $('.box .num').click(function () {
             // 碰到span加cur，其他去cur
             $(this).addClass('flag').siblings().removeClass('flag');
 
