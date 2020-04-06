@@ -84,6 +84,7 @@
         var idx = 0;
         // 写一个锁，标记用户鼠标是否移动上来了
         var lock = true;
+
         // 定时器
         setInterval(function () {
             // 如果锁是开着的，那么就触发右按钮
@@ -91,10 +92,10 @@
                 idx++;
                 if (idx > 4) {
                     idx = 0;
-                    $('#box ul').animate({ 'top': -234 * idx }, 500);
+                    $('#box ul').stop(true).animate({ 'top': -234 * idx }, 500);
                 }
                 // 触发大图片轮播
-                $('#box ul').animate({ 'top': -234 * idx }, 500);
+                $('#box ul').stop(true).animate({ 'top': -234 * idx }, 500);
                 // 让第idx那个小图片加checked，兄弟们都去掉checked
                 $('#box ol li').eq(idx).addClass('checked').siblings().removeClass('checked');
             }
@@ -105,7 +106,7 @@
             // 这样的写法就表示你点击的小圆点序号
             idx = $(this).index();
             // 拉动
-            $('#box ul').animate({ 'top': -234 * idx }, 500);
+            $('#box ul').stop(true).animate({ 'top': -234 * idx }, 500);
             // 让第idx那个小圆点加checked，兄弟们都去掉checked
             $('#box ol li').eq(idx).addClass('checked').siblings().removeClass('checked');
         });

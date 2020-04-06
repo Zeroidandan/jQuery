@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>折叠卡片+Tab选项卡</title>
+    <title>慕课网综合特效</title>
     <style>
         * {
             margin: 0;
@@ -14,188 +14,432 @@
         h1 {
             margin-bottom: 50px;
             text-align: center;
+            line-height: 50px;
         }
 
         .box {
-            width: 900px;
-            background-color: rgb(252, 199, 199);
-            margin: 100px auto;
+            width: 700px;
+            height: 450px;
+            /* background-color: rgb(252, 199, 199); */
+            margin: 50px auto;
         }
 
-        .card {
+        .box .title {
             line-height: 30px;
             background-color: #eef8e9;
-            color: #54c5ca;
+            color: #000000;
             cursor: pointer;
+            padding-left: 30px;
         }
 
-        .tab {
+        /* 内容高度固定 */
+        .box .content {
+            height: 300px;
+            overflow: hidden;
+            padding-top: 30px;
             display: none;
+            /* 清除浮动 */
+            overflow: hidden;
         }
 
-        .box .tab.flag {
+        .box .content.no0 {
             display: block;
         }
 
-        .tab_num {
-            width: 120px;
-            height: 300px;
+        .box .title span {
+            color: #54c5ca;
+            display: inline;
+            font-weight: bold;
+            font-size: 22px;
+            padding-right: 5px;
+        }
+
+        .box .title.cur span {
+            display: none;
+        }
+
+        .box .title.cur {
+            color: #54c5ca;
+        }
+
+        .content .tabNum {
             float: left;
-            background-color: blue;
-        }
-
-        .tab_content {
-            width: 780px;
+            width: 100px;
             height: 300px;
-            float: right;
-            /* position: absolute; */
-            background-color: green;
         }
 
-        .num {
+        .content .tabNum .num {
             width: 80px;
             height: 40px;
-            border-radius: 10px;
+            margin-bottom: 20px;
+            margin-left: 20px;
             background-color: #f3f5f6;
-            margin: 20px;
-            line-height: 40px;
+            color: black;
+            border-radius: 10px;
             text-align: center;
+            line-height: 40px;
             cursor: pointer;
         }
 
-        .content {
-            width: 500px;
-            /* background-color: #f3f5f6; */
-            /* background-color: red; */
-            
+        .content .tabCon {
+            float: left;
+            position: relative;
         }
 
-        .box .tab .tab_num {
+        .content .tabCon .con {
+            position: absolute;
+            top: 0px;
+            left: 30px;
+            width: 570px;
+            height: 290px;
+            background-color: #f3f5f6;
+            overflow: auto;
             display: none;
+            padding-top: 20px;
+            padding-left: 40px;
         }
 
-        .box .tab .tab_num.flag {
-            display: block;
+        .content .tabNum .num.cur {
+            background-color: #099fb0;
+            color:#fff ;
         }
 
-        .box .tab .tab_content .content {
-            display: none;
-        }
-
-        .box .tab .tab_content .content.flag {
+        .content .tabCon .con.no0 {
             display: block;
         }
     </style>
 </head>
 
 <body>
-    <div class="box">
-        <h1>课程大纲及学习周期安排（详细版）</h1>
-        <!-- 折叠卡片 -->
-        <div class="card">
-            <p>阶段一：Python零基础入门</p>
+    <h1>课程大纲及学习周期安排（详细版）</h1>
+    <div class="box" id="box">
+        <!-- 阶段一 -->
+        <div class="title cur">
+            <p><span>+</span>阶段一：Python零基础入门</p>
         </div>
-        <!-- Tab选项卡 -->
-        <div class="tab flag">
-            <!-- 选项 -->
-            <div class="tab_num  flag">
-                <div class="num">步骤一</div>
+        <div class="content no0">
+            <div class="tabNum">
+                <div class="num cur">步骤一</div>
                 <div class="num">步骤二</div>
                 <div class="num">步骤三</div>
                 <div class="num">步骤四</div>
                 <div class="num">步骤五</div>
             </div>
-            <!-- 选项内容 -->
-            <div class="tab_content">
-                <div class="content flag">步骤一步骤一步骤一步骤一步骤一</div>
-                <div class="content">步骤二步骤二步骤二</div>
-                <div class="content">步骤三步骤三步骤三步骤三步骤三</div>
-                <div class="content">步骤四步骤四步骤四步骤四步骤四</div>
-                <div class="content">步骤五步骤五步骤五步骤五</div>
+            <div class="tabCon">
+                <div class="con no0">
+                    <ol>
+                        <li>安装Python的开发环境</li>
+                        <li>Python变量及字符串的应用</li>
+                        <li>Python流程控制</li>
+                        <li>常用运算符的原理</li>
+                        <li>Python数据结构列表/字典/元组/集合</li>
+                        <li>结合所学编写常见小案例</li>
+                    </ol>
+                </div>
+                <div class="con">
+                    <ol>
+                        <li>安装Python的开发环境</li>
+                        <li>安装Python的开发环境</li>
+                        <li>安装Python的开发环境</li>
+                        <li>安装Python的开发环境</li>
+                        <li>Python变量及字符串的应用</li>
+                        <li>Python流程控制</li>
+                        <li>常用运算符的原理</li>
+                        <li>Python数据结构列表/字典/元组/集合</li>
+                        <li>结合所学编写常见小案例</li>
+                    </ol>
+                </div>
+                <div class="con">
+                    <ol>
+                        <li>安装Python的开发环境</li>
+                        <li>Python变量及字符串的应用</li>
+                        <li>Python变量及字符串的应用</li>
+                        <li>Python变量及字符串的应用</li>
+                        <li>Python变量及字符串的应用</li>
+                        <li>Python流程控制</li>
+                        <li>常用运算符的原理</li>
+                        <li>Python数据结构列表/字典/元组/集合</li>
+                        <li>结合所学编写常见小案例</li>
+                    </ol>
+                </div>
+                <div class="con">
+                    <ol>
+                        <li>安装Python的开发环境</li>
+                        <li>Python变量及字符串的应用</li>
+                        <li>Python流程控制</li>
+                        <li>Python流程控制</li>
+                        <li>Python流程控制</li>
+                        <li>Python流程控制</li>
+                        <li>Python流程控制</li>
+                        <li>常用运算符的原理</li>
+                        <li>Python数据结构列表/字典/元组/集合</li>
+                        <li>结合所学编写常见小案例</li>
+                    </ol>
+                </div>
+                <div class="con">
+                    <ol>
+                        <li>安装Python的开发环境</li>
+                        <li>Python变量及字符串的应用</li>
+                        <li>Python流程控制</li>
+                        <li>Python流程控制</li>
+                        <li>Python流程控制</li>
+                        <li>Python流程控制</li>
+                        <li>常用运算符的原理</li>
+                        <li>Python数据结构列表/字典/元组/集合</li>
+                        <li>结合所学编写常见小案例</li>
+                    </ol>
+                </div>
             </div>
         </div>
-
-        <div class="card">
-            <p>阶段二：Python操作三大数据库</p>
+        <!-- 阶段二 -->
+        <div class="title">
+            <p><span>+</span>阶段二：Python操作三大数据库</p>
         </div>
-        <div class="tab">
-            <div class="tab_num  flag">
-                <div class="num">步骤一</div>
-                <div class="num">步骤二</div>
-                <div class="num">步骤三</div>
-            </div>
-            <div class="tab_content">
-                <div class="content flag">步骤一步骤一步骤一步骤一步骤一</div>
-                <div class="content">步骤二步骤二步骤二</div>
-                <div class="content">步骤三步骤三步骤三步骤三步骤三</div>
-            </div>
-        </div>
-
-        <div class="card">
-            <p>阶段三：从网页搭建入门Python Web</p>
-        </div>
-        <div class="tab">
-            <div class="tab_num  flag">
-                <div class="num">步骤一</div>
+        <div class="content no1">
+            <div class="tabNum">
+                <div class="num cur">步骤一</div>
                 <div class="num">步骤二</div>
                 <div class="num">步骤三</div>
                 <div class="num">步骤四</div>
             </div>
-            <div class="tab_content">
-                <div class="content flag">步骤一步骤一步骤一步骤一步骤一</div>
-                <div class="content">步骤二步骤二步骤二</div>
-                <div class="content">步骤三步骤三步骤三步骤三步骤三</div>
-                <div class="content">步骤四步骤四步骤四步骤四步骤四</div>
+            <div class="tabCon">
+                <div class="con no0">
+                    <ol>
+                        <li>结合所学编写常见小案例</li>
+                        <li>结合所学编写常见小案例</li>
+                        <li>结合所学编写常见小案例</li>
+                        <li>结合所学编写常见小案例</li>
+                    </ol>
+                </div>
+                <div class="con">
+                    <ol>
+                        <li>安装Python的开发环境</li>
+                        <li>安装Python的开发环境</li>
+                        <li>安装Python的开发环境</li>
+                        <li>安装Python的开发环境</li>
+                        <li>安装Python的开发环境</li>
+                        <li>安装Python的开发环境</li>
+                    </ol>
+                </div>
+                <div class="con">
+                    <ol>
+                        <li>安装Python的开发环境</li>
+                        <li>Python变量及字符串的应用</li>
+                        <li>Python变量及字符串的应用</li>
+                        <li>Python变量及字符串的应用</li>
+                        <li>Python变量及字符串的应用</li>
+                        <li>Python变量及字符串的应用</li>
+                        <li>Python变量及字符串的应用</li>
+                        <li>Python变量及字符串的应用</li>
+                        <li>Python变量及字符串的应用</li>
+                    </ol>
+                </div>
+                <div class="con">
+                    <ol>
+                        <li>安装Python的开发环境</li>
+                        <li>Python变量及字符串的应用</li>
+                        <li>Python流程控制</li>
+                        <li>常用运算符的原理</li>
+                        <li>Python数据结构列表/字典/元组/集合</li>
+                        <li>Python数据结构列表/字典/元组/集合</li>
+                        <li>Python数据结构列表/字典/元组/集合</li>
+                        <li>Python数据结构列表/字典/元组/集合</li>
+                        <li>Python数据结构列表/字典/元组/集合</li>
+                        <li>Python数据结构列表/字典/元组/集合</li>
+                        <li>Python数据结构列表/字典/元组/集合</li>
+                        <li>Python数据结构列表/字典/元组/集合</li>
+                        <li>Python数据结构列表/字典/元组/集合</li>
+                        <li>结合所学编写常见小案例</li>
+                    </ol>
+                </div>
             </div>
         </div>
-
-        <div class="card">
-            <p>阶段四：入门主流框架Scrapy与爬虫项目实战</p>
+        <!-- 阶段三 -->
+        <div class="title">
+            <p><span>+</span>阶段三：从网页搭建入门Python Web</p>
         </div>
-        <div class="tab">
-            <div class="tab_num  flag">
-                <div class="num">步骤一</div>
+        <div class="content no2">
+            <div class="tabNum">
+                <div class="num cur">步骤一</div>
                 <div class="num">步骤二</div>
                 <div class="num">步骤三</div>
                 <div class="num">步骤四</div>
             </div>
-            <div class="tab_content">
-                <div class="content flag">步骤一步骤一步骤一步骤一步骤一</div>
-                <div class="content">步骤二步骤二步骤二</div>
-                <div class="content">步骤三步骤三步骤三步骤三步骤三</div>
-                <div class="content">步骤四步骤四步骤四步骤四步骤四</div>
+            <div class="tabCon">
+                <div class="con no0">
+                    <ol>
+                        <li>安装Python的开发环境</li>
+                        <li>Python变量及字符串的应用</li>
+                        <li>Python流程控制</li>
+                        <li>常用运算符的原理</li>
+                        <li>Python数据结构列表/字典/元组/集合</li>
+                        <li>Python数据结构列表/字典/元组/集合</li>
+                        <li>Python数据结构列表/字典/元组/集合</li>
+                        <li>Python数据结构列表/字典/元组/集合</li>
+                        <li>Python数据结构列表/字典/元组/集合</li>
+                        <li>Python数据结构列表/字典/元组/集合</li>
+                        <li>Python数据结构列表/字典/元组/集合</li>
+                        <li>Python数据结构列表/字典/元组/集合</li>
+                        <li>Python数据结构列表/字典/元组/集合</li>
+                        <li>结合所学编写常见小案例</li>
+                    </ol>
+                </div>
+                <div class="con">
+                    <ol>
+                        <li>安装Python的开发环境</li>
+                        <li>Python变量及字符串的应用</li>
+                        <li>Python流程控制</li>
+                        <li>常用运算符的原理</li>
+                        <li>Python数据结构列表/字典/元组/集合</li>
+                        <li>Python数据结构列表/字典/元组/集合</li>
+                        <li>Python数据结构列表/字典/元组/集合</li>
+                        <li>Python数据结构列表/字典/元组/集合</li>
+                        <li>Python数据结构列表/字典/元组/集合</li>
+                        <li>Python数据结构列表/字典/元组/集合</li>
+                        <li>Python数据结构列表/字典/元组/集合</li>
+                        <li>Python数据结构列表/字典/元组/集合</li>
+                        <li>Python数据结构列表/字典/元组/集合</li>
+                        <li>结合所学编写常见小案例</li>
+                    </ol>
+                </div>
+                <div class="con">
+                    <ol>
+                        <li>安装Python的开发环境</li>
+                        <li>Python变量及字符串的应用</li>
+                        <li>Python流程控制</li>
+                        <li>常用运算符的原理</li>
+                        <li>Python数据结构列表/字典/元组/集合</li>
+                        <li>Python数据结构列表/字典/元组/集合</li>
+                        <li>Python数据结构列表/字典/元组/集合</li>
+                        <li>Python数据结构列表/字典/元组/集合</li>
+                        <li>Python数据结构列表/字典/元组/集合</li>
+                        <li>Python数据结构列表/字典/元组/集合</li>
+                        <li>Python数据结构列表/字典/元组/集合</li>
+                        <li>Python数据结构列表/字典/元组/集合</li>
+                        <li>Python数据结构列表/字典/元组/集合</li>
+                        <li>结合所学编写常见小案例</li>
+                    </ol>
+                </div>
+                <div class="con"> 
+                    <ol>
+                        <li>安装Python的开发环境</li>
+                        <li>Python变量及字符串的应用</li>
+                        <li>Python流程控制</li>
+                        <li>常用运算符的原理</li>
+                        <li>Python数据结构列表/字典/元组/集合</li>
+                        <li>Python数据结构列表/字典/元组/集合</li>
+                        <li>Python数据结构列表/字典/元组/集合</li>
+                        <li>Python数据结构列表/字典/元组/集合</li>
+                        <li>Python数据结构列表/字典/元组/集合</li>
+                        <li>Python数据结构列表/字典/元组/集合</li>
+                        <li>Python数据结构列表/字典/元组/集合</li>
+                        <li>Python数据结构列表/字典/元组/集合</li>
+                        <li>Python数据结构列表/字典/元组/集合</li>
+                        <li>结合所学编写常见小案例</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+        <!-- 阶段四 -->
+        <div class="title">
+            <p><span>+</span>阶段四：入门主流框架Scrapy与爬虫项目实战</p>
+        </div>
+        <div class="content no3">
+            <div class="tabNum">
+                <div class="num cur">步骤一</div>
+                <div class="num">步骤二</div>
+                <div class="num">步骤三</div>
+            </div>
+            <div class="tabCon">
+                <div class="con no0">
+                    <ol>
+                        <li>结合所学编写常见小案例</li>
+                        <li>结合所学编写常见小案例</li>
+                        <li>结合所学编写常见小案例</li>
+                        <li>结合所学编写常见小案例</li>
+                        <li>结合所学编写常见小案例</li>
+                        <li>结合所学编写常见小案例</li>
+                    </ol>
+                </div>
+                <div class="con">
+                    <ol>
+                        <li>Python数据结构列表/字典/元组/集合</li>
+                        <li>Python数据结构列表/字典/元组/集合</li>
+                        <li>Python数据结构列表/字典/元组/集合</li>
+                        <li>Python数据结构列表/字典/元组/集合</li>
+                        <li>Python数据结构列表/字典/元组/集合</li>
+                    </ol>
+                </div>
+                <div class="con">
+                    <ol>
+                        <li>常用运算符的原理</li>
+                        <li>常用运算符的原理</li>
+                        <li>常用运算符的原理</li>
+                        <li>常用运算符的原理</li>
+                        <li>常用运算符的原理</li>
+                    </ol>
+                </div>
             </div>
         </div>
     </div>
 
     <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
     <script>
-        // 折叠点击
-        $('.box .card').click(function () {
-            // 判断下一个兄弟是否可见
-            // 如果下一个兄弟不可见
-            if (!$(this).next().is(':visible')) {
-                // 让你点击的这个h4下一个兄弟.inn展开
-                // 让所有的content（包括它自己的下一个兄弟)都合起来
-                $('.tab').slideUp();
-                // next就是下一个兄弟，slideDown就是展开，300是毫秒数
-                $(this).next().slideDown(300);
-            } else {
-                // 否则就合起来，slideUp就是合起来，300是毫秒数
-                $(this).next().slideUp(300);
+        $('#box .title').click(function () {
+            // 如果当前点击title的content可见，再点击不作任何操作
+            if ($(this).next('.content').is(':visible')) {
+                return;
             }
+            // 让所有的content都合起来，让点击的title的content可见
+            $('.content:visible').slideUp(300);
+            $(this).next('.content').slideDown(300);
+            //让点击的元素加cur
+            $(this).addClass('cur').siblings('.title').removeClass('cur');
         });
 
-        //Tab点击
-        $('.box .num').click(function () {
-            // 碰到span加cur，其他去cur
-            $(this).addClass('flag').siblings().removeClass('flag');
+        var inn0 = 0;
+        var inn1 = 0;
+        var inn2 = 0;
+        var inn3 = 0;
 
-            // 得到你碰到的元素的序号
-            var n = $(this).index();
+        $('.content.no0 .num').click(function () {
+            // 相当于就是一个呼吸轮播
+            $('.content.no0 .con').eq(inn0).stop(true).fadeOut(100)
+            inn0 = $(this).index();
+            $('.content.no0 .con').eq(inn0).stop(true).fadeIn(100)
 
-            // 让下面的inner也是这个序号的，加flag，其他去flag
-            $('.content').eq(n).addClass('flag').siblings().removeClass('flag');
+            // 调整cur
+            $('.content.no0 .num').eq(inn0).addClass('cur').siblings().removeClass('cur');
+        });
+
+        $('.content.no1 .num').click(function () {
+            // 相当于就是一个呼吸轮播
+            $('.content.no1 .con').eq(inn1).stop(true).fadeOut(100)
+            inn1 = $(this).index();
+            $('.content.no1 .con').eq(inn1).stop(true).fadeIn(100)
+
+            // 调整cur
+            $('.content.no1 .num').eq(inn1).addClass('cur').siblings().removeClass('cur');
+        });
+
+        $('.content.no2 .num').click(function () {
+            // 相当于就是一个呼吸轮播
+            $('.content.no2 .con').eq(inn2).stop(true).fadeOut(100)
+            inn2 = $(this).index();
+            $('.content.no2 .con').eq(inn2).stop(true).fadeIn(100)
+
+            // 调整cur
+            $('.content.no2 .num').eq(inn2).addClass('cur').siblings().removeClass('cur');
+        });
+
+        $('.content.no3 .num').click(function () {
+            // 相当于就是一个呼吸轮播
+            $('.content.no3 .con').eq(inn3).stop(true).fadeOut(100)
+            inn3 = $(this).index();
+            $('.content.no3 .con').eq(inn3).stop(true).fadeIn(100)
+
+            // 调整cur
+            $('.content.no3 .num').eq(inn3).addClass('cur').siblings().removeClass('cur');
         });
     </script>
 </body>
