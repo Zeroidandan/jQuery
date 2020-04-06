@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>多级折叠菜单</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .box {
+            width: 300px;
+            margin: 100px auto;
+        }
+
+        .box1 {
+            cursor: pointer;
+            line-height: 40px;
+            font-weight: bold;
+            padding-left: 20px;
+            border-top: 1px solid #ccc;
+            border-bottom: 1px solid #ccc;
+        }
+        img{
+            width: 16px;
+            height: 16px;
+            padding-left: 5px;
+        }
+        .con1 {
+            display: none;
+            cursor: pointer;
+            border: mediumslateblue;
+        }
+
+        .b2 {
+            cursor: pointer;
+        }
+    
+        .c2 {
+            cursor: pointer;
+            display: none;
+            background-color: lightpink;
+        }
+
+        .c3 {
+            cursor: pointer;
+            display: none;
+            background-color: mediumspringgreen;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <div class="box1">Architectural Patterns</div>
+        <dic class="con1">
+            <p>App Shell Model</p>
+        </dic>
+
+        <div class="box1">Design & User Experience</div>
+        <dic class="con1">
+            <div class="box2">
+                <div class="b2">Desigining Great User Experience</div>
+                <div class="c2">
+                    <div class="bb">
+                        <div class="b3">
+                            <p>Basics of User Experiences</p>
+                        </div>
+                        <div class="c3">
+                            <p>introduction to Focus</p>
+                            <p>DOM Order Matters</p>
+                        </div>
+                        <p>What Makes a Good Mobile Site?</p>
+                        <p>Introdution to variable fonts on th web</p>
+                        <p>Additional Colors and Icons</p>
+                    </div>
+                </div>
+            </div>
+            <div class="box2">Accessiblitity</div>
+            <div class="box2">Animations</div>
+            <div class="box2">Responsive Web Design</div>
+        </dic>
+    </div>
+
+
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        $('.box .box1').click(function () {
+            // $('.box span').style.src = 'images/icon3.png';
+            if (!$(this).next().is(':visible')) {
+                $(this).next().slideDown(300);
+            } else {
+                $(this).next().slideUp(300);
+            }
+        });
+
+        $('.con1 .box2 .b2').click(function () {
+            if (!$(this).next().is(':visible')) {
+                $(this).next().slideDown(300);
+            } else {
+                $(this).next().slideUp(300);
+            }
+        });
+
+        $('.c2 .bb .b3').click(function () {
+            if (!$(this).next().is(':visible')) {
+                $(this).next().slideDown(300);
+            } else {
+                $(this).next().slideUp(300);
+            }
+        });
+    </script>
+</body>
+
+</html>
