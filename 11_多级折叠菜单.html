@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>多级折叠菜单</title>
+    <title>Document</title>
     <style>
         * {
             margin: 0;
@@ -12,107 +12,178 @@
         }
 
         .box {
-            width: 300px;
-            margin: 100px auto;
+            width: 200px;
+            margin: 30px 30px 0px;
+            border: 1px solid #ccc;
+            padding: 20px;
+            font-size: 16px;
+            line-height: 30px;
         }
 
-        .box1 {
+        .title1{
             cursor: pointer;
-            line-height: 40px;
-            font-weight: bold;
+            position: relative;
+        }
+        .title2{
+            cursor: pointer;
+            position: relative;
+        }
+        .title3{
+            cursor: pointer;
+            position: relative;
+        }
+        .title4{
+            cursor: pointer;
+            position: relative;
+        }
+        .con1{
+            display: none;
             padding-left: 20px;
-            border-top: 1px solid #ccc;
-            border-bottom: 1px solid #ccc;
         }
-        img{
-            width: 16px;
-            height: 16px;
-            padding-left: 5px;
-        }
-        .con1 {
+        .con2{
             display: none;
-            cursor: pointer;
-            border: mediumslateblue;
+            padding-left: 20px;
+        }
+        .con3{
+            display: none;
+            padding-left: 20px;
+        }
+        .con4{
+            display: none;
+            padding-left: 20px;
         }
 
-        .b2 {
-            cursor: pointer;
+        .title1::after{
+            content: '';
+            background: url(images/jiantou.svg);
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 20px;
+            height: 20px;
+            padding-top: 5px;
+            transition: all 0.3s ease 0s;
         }
-    
-        .c2 {
-            cursor: pointer;
-            display: none;
-            background-color: lightpink;
+        /* 如果有cur属性就旋转 */
+        .title1.cur::after{
+           transform: rotateX(180deg);
         }
-
-        .c3 {
-            cursor: pointer;
-            display: none;
-            background-color: mediumspringgreen;
+        .havechild::before{
+            content: '';
+            background: url(images/jiantou2.svg);
+            position: absolute;
+            top: 5px;
+            left: -25px;
+            width: 20px;
+            height: 20px;
+            transition: all 0.3s ease 0s;
+        }
+        /* 如果有cur属性就旋转 */
+        .havechild.cur::before{
+            transform: rotate(90deg);
         }
     </style>
 </head>
 
 <body>
     <div class="box">
-        <div class="box1">Architectural Patterns</div>
-        <dic class="con1">
-            <p>App Shell Model</p>
-        </dic>
-
-        <div class="box1">Design & User Experience</div>
-        <dic class="con1">
-            <div class="box2">
-                <div class="b2">Desigining Great User Experience</div>
-                <div class="c2">
-                    <div class="bb">
-                        <div class="b3">
-                            <p>Basics of User Experiences</p>
+        <div class="title">
+            <!-- 一级 -->
+            <div class="title1">河北省</div>
+            <div class="con1">
+                <!-- 二级 -->
+                <div class="title2 havechild">石家庄市</div>
+                <div class="con2">
+                    <!-- 三级 -->
+                    <div class="title3 havechild">正定县</div>
+                    <div class="con3">
+                        <!-- 四级 -->
+                        <div class="title4 havechild">微水镇</div>
+                        <div class="con4">
+                            <!-- 五级 -->
+                            <div class="title5">北良都村</div>
+                            <div class="title5">长岗村</div>
                         </div>
-                        <div class="c3">
-                            <p>introduction to Focus</p>
-                            <p>DOM Order Matters</p>
-                        </div>
-                        <p>What Makes a Good Mobile Site?</p>
-                        <p>Introdution to variable fonts on th web</p>
-                        <p>Additional Colors and Icons</p>
+                        <!-- 四级 -->
+                        <div class="title4">上安镇</div>
+                        <div class="con4"></div>
                     </div>
+                    <!-- 三级 -->
+                    <div class="title3">井陉县</div>
+                    <div class="con3"></div>
                 </div>
+                <!-- 二级 -->
+                <div class="title2">邯郸市</div>
+                <div class="con2"></div>
             </div>
-            <div class="box2">Accessiblitity</div>
-            <div class="box2">Animations</div>
-            <div class="box2">Responsive Web Design</div>
-        </dic>
+        </div>
+        <div class="con"></div>
+
+        <div class="title"></div>
+        <div class="con"></div>
     </div>
-
-
-    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
-    <script>
-        $('.box .box1').click(function () {
-            // $('.box span').style.src = 'images/icon3.png';
-            if (!$(this).next().is(':visible')) {
-                $(this).next().slideDown(300);
-            } else {
-                $(this).next().slideUp(300);
-            }
-        });
-
-        $('.con1 .box2 .b2').click(function () {
-            if (!$(this).next().is(':visible')) {
-                $(this).next().slideDown(300);
-            } else {
-                $(this).next().slideUp(300);
-            }
-        });
-
-        $('.c2 .bb .b3').click(function () {
-            if (!$(this).next().is(':visible')) {
-                $(this).next().slideDown(300);
-            } else {
-                $(this).next().slideUp(300);
-            }
-        });
-    </script>
 </body>
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<script>
+    $('.title1').click(function () {
+        // 判断它的兄弟是否已经展开
+        if ($(this).siblings('.con1').is(':visible')) {
+            // 让你点击的这个h的兄弟的lev1_b这个，合上
+            $(this).siblings('.con1').slideUp(100);
+            // 去掉cur
+            $(this).removeClass('cur');
+        } else {
+            // 让你点击的这个h的兄弟的lev1_b这个，展开
+            $(this).siblings('.con1').slideDown(100);
+            // 加cur
+            $(this).addClass('cur');
+        }
+    });
+
+    $('.title2').click(function () {
+        // 判断它的兄弟是否已经展开
+        if ($(this).siblings('.con2').is(':visible')) {
+            // 让你点击的这个h的兄弟的lev1_b这个，合上
+            $(this).siblings('.con2').slideUp(100);
+            // 去掉cur
+            $(this).removeClass('cur');
+        } else {
+            // 让你点击的这个h的兄弟的lev1_b这个，展开
+            $(this).siblings('.con2').slideDown(100);
+            // 加cur
+            $(this).addClass('cur');
+        }
+    });
+
+    $('.title3').click(function () {
+        // 判断它的兄弟是否已经展开
+        if ($(this).siblings('.con3').is(':visible')) {
+            // 让你点击的这个h的兄弟的lev1_b这个，合上
+            $(this).siblings('.con3').slideUp(100);
+            // 去掉cur
+            $(this).removeClass('cur');
+        } else {
+            // 让你点击的这个h的兄弟的lev1_b这个，展开
+            $(this).siblings('.con3').slideDown(100);
+            // 加cur
+            $(this).addClass('cur');
+        }
+    });
+
+    $('.title4').click(function () {
+        // 判断它的兄弟是否已经展开
+        if ($(this).siblings('.con4').is(':visible')) {
+            // 让你点击的这个h的兄弟的lev1_b这个，合上
+            $(this).siblings('.con4').slideUp(100);
+            // 去掉cur
+            $(this).removeClass('cur');
+        } else {
+            // 让你点击的这个h的兄弟的lev1_b这个，展开
+            $(this).siblings('.con4').slideDown(100);
+            // 加cur
+            $(this).addClass('cur');
+        }
+    });
+</script>
 
 </html>
