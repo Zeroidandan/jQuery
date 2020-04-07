@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>搜狐娱乐轮播</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .carousel {
+            width: 930px;
+            height: 350px;
+            margin: 100px auto;
+            position: relative;
+            background-color: rgb(0, 0, 0);
+        }
+
+        .carousel ul li {
+            list-style: none;
+            width: 930px;
+            height: 350px;
+            overflow: hidden;
+            position: absolute;
+        }
+
+        /* 图片只显示中间部分 */
+        .carousel ul li img {
+            width: 1120px;
+            height: 350px;
+            position: absolute;
+            left: 50%;
+            margin-left: -560px;
+        }
+
+        .bottom {
+            width: 620px;
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            margin-left: -315px;
+            /* border: 3px solid #000; */
+        }
+
+        /* 底部遮盖 */
+        .mark {
+            width: 100%;
+            height: 100px;
+            background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0), #000);
+            bottom: 0px;
+            position: absolute;
+        }
+
+        .bottom .rightbtn {
+            float: right;
+            width: 31px;
+            height: 46px;
+            background: url(images/next.png);
+            margin-top: 5px;
+            position: relative;
+            /* z-index: 9999; */
+        }
+
+        .bottom .rightbtn:hover {
+            background: url(images/next-h.png);
+        }
+
+        .bottom .leftbtn {
+            float: left;
+            width: 31px;
+            height: 46px;
+            background: url(images/prev.png);
+            margin-top: 5px;
+            margin-right: 19px;
+            position: relative;
+            /* z-index: 9999; */
+        }
+
+        .bottom .leftbtn:hover {
+            background: url(images/prev-h.png);
+        }
+
+        .bottom ol {
+            width: 3000px;
+            list-style: none;
+            position: relative;
+        }
+
+        .bottom ol li {
+            width: 90px;
+            height: 45px;
+            float: left;
+            padding: 7px 2px 2px;
+            margin-right: 12px;
+        }
+
+        .bottom ol li img {
+            position: absolute;
+            width: 90px;
+            height: 45px;
+            float: left;
+        }
+
+        .bottom ol li.cur {
+            background: url(images/lion.png);
+        }
+
+        /* 小图片用盒子嵌套起来 */
+        .carousel .smallpic {
+            list-style: none;
+            float: left;
+            width: 530px;
+            overflow: hidden;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="carousel">
+        <ul>
+            <li class="no0"><a href="#"><img src="images/sohu1.jpg" alt=""></a></li>
+            <li><a href="#"><img src="images/sohu2.jpg" alt=""></a></li>
+            <li><a href="#"><img src="images/sohu3.jpg" alt=""></a></li>
+            <li><a href="#"><img src="images/sohu4.jpg" alt=""></a></li>
+            <li><a href="#"><img src="images/sohu5.jpg" alt=""></a></li>
+        </ul>
+
+        <div class="mark"></div>
+        <div class="bottom">
+            <a href="javascript:;" class="leftbtn"></a>
+            <div class="smallpic">
+                <ol>
+                    <li class="cur"><img src="images/sohu1_s.jpg" alt=""></li>
+                    <li><img src="images/sohu2_s.jpg" alt=""></li>
+                    <li><img src="images/sohu3_s.jpg" alt=""></li>
+                    <li><img src="images/sohu4_s.jpg" alt=""></li>
+                    <li><img src="images/sohu5_s.jpg" alt=""></li>
+                </ol>
+            </div>
+            <a href="javascript:;" class="rightbtn"></a>
+        </div>
+    </div>
+
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        // 底部小图片克隆
+        $('.carousel .bottom ol li').clone().appendTo('.carousel .bottom ol');
+
+        // 信号量1,小图片
+        var idx = 0;
+        // 信号量2：大图片
+        var nowshow = 0;
+
+        // 提炼
+        $lis = $('.carousel ul li');
+        $ol = $('.carousel .bottom .smallpic ol');
+        $olis = $('.carousel .bottom .smallpic ol li');
+
+        // 点击右按钮
+        $('.carousel .rightbtn').click(function () {
+            idx++;
+            $ol.animate({ 'left': -106 * idx }, 100, function () {
+                if (idx == 5) {
+                    idx = 0;
+                    $ol.css('left', 0);
+                }
+            });
+        });
+
+        // 点击左按钮
+        $('.carousel .leftbtn').click(function () {
+            idx--;
+            if (idx == -1) {
+                $ol.css('left', -106 * 5);
+                idx = 4;
+            }
+            $ol.animate({ 'left': -106 * idx }, 100);
+        });
+
+        // 鼠标触碰小图
+        $olis.mouseenter(function () {
+            // 直接调用render函数
+            rander($(this).index() % 5);
+        });
+
+        // 封装呼吸函数
+        function rander(newNowshow) {
+            $lis.stop(true).fadeOut(300);
+            nowshow = newNowshow;
+            $lis.eq(nowshow).stop(true).fadeIn(300);
+            $olis.removeClass('cur');
+            $olis.eq(nowshow).addClass('cur');
+            $olis.eq(nowshow + 5).addClass('cur');
+        }
+
+        // 上锁
+        var lock = true;
+
+        $('.carousel').mouseenter(function () {
+            lock = false;
+        });
+        $('.carousel').mouseleave(function () {
+            lock = true;
+        });
+
+        // 定时器
+        setInterval(function () {
+            if (!lock) return;
+            // 模拟点击右按钮
+            $('.carousel .rightbtn').trigger('click');
+            // 调用render函数
+            rander((nowshow + 1) % 5);
+        }, 1000);
+    </script>
+</body>
+
+</html>
